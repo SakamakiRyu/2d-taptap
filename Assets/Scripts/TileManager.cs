@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -61,5 +62,25 @@ public class TileManager : MonoBehaviour
         }
 
         return tapOrder;
+    }
+
+    /// <summary>
+    /// èáî‘ÇÃämîF
+    /// </summary>
+    public void OrderConfirm()
+    {
+        StartCoroutine(TilesFlashAsync());
+    }
+
+    /// <summary>
+    /// èáî‘Ç…ì_ñ≈Ç∑ÇÈ
+    /// </summary>
+    private IEnumerator TilesFlashAsync()
+    {
+        foreach (var item in _tapOrder)
+        {
+            Debug.Log(item);
+            yield return _tileArray[item].FlashAsync();
+        }
     }
 }
