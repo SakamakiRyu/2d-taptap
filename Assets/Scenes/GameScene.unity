@@ -1332,7 +1332,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a306d1eef72ae0f4aa0e34fb04e960d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _orderCount: 6
+  _startedOrderCount: 0
 --- !u!4 &811087515
 Transform:
   m_ObjectHideFlags: 0
@@ -2257,7 +2257,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 811087514}
         m_TargetAssemblyTypeName: TileManager, Assembly-CSharp
-        m_MethodName: OrderConfirm
+        m_MethodName: TapOrderConfirm
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

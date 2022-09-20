@@ -14,18 +14,21 @@ public class TileManager : MonoBehaviour
     private TileController[] _tileArray;
 
     // タップする順番
-    private Queue<int> _tapOrder;
+    private List<int> _tapOrder;
 
+    [Header("最初の注文")]
     [SerializeField]
-    private int _orderCount;
+    private int _startedOrderCount;
+
+    // 間隔
+    private float Interval = 0.5f;
 
     private void Start()
     {
-        // タイルの取得
         _tileArray = FindObjectsOfType<TileController>();
         SortTileArray(_tileArray);
         SetID(_tileArray);
-        _tapOrder = CreateTapOrder(_orderCount);
+        _tapOrder = CreateTapOrder(_startedOrderCount);
     }
 
     /// <summary>
@@ -51,14 +54,14 @@ public class TileManager : MonoBehaviour
     /// <summary>
     /// タップする順番を作成
     /// </summary>
-    private Queue<int> CreateTapOrder(int count)
+    private List<int> CreateTapOrder(int count)
     {
-        var tapOrder = new Queue<int>();
+        var tapOrder = new List<int>();
 
         for (int i = 0; i < count; i++)
         {
             var item = Range(0, _tileArray.Length);
-            tapOrder.Enqueue(item);
+            tapOrder.Add(item);
         }
 
         return tapOrder;
@@ -67,7 +70,7 @@ public class TileManager : MonoBehaviour
     /// <summary>
     /// 順番の確認
     /// </summary>
-    public void OrderConfirm()
+    public void TapOrderConfirm()
     {
         StartCoroutine(TilesFlashAsync());
     }
@@ -77,10 +80,22 @@ public class TileManager : MonoBehaviour
     /// </summary>
     private IEnumerator TilesFlashAsync()
     {
+        var timer = 0f;
+        yield return null;
+
         foreach (var item in _tapOrder)
         {
-            Debug.Log(item);
-            yield return _tileArray[item].FlashAsync();
+            if (timer < Interval)
+            {
+                timer += Time.deltaTime;
+                yield return null;
+            }
+            else
+            {
+                Debug.Log("flash");
+                timer = 0f;
+                yield return _tileArray[item].FlashAsync();
+            }
         }
     }
 }
