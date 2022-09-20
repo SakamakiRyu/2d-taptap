@@ -1,6 +1,10 @@
 using UnityEngine;
+using UnityEngine.UI;
 
-public class InGameEvents : MonoBehaviour
+/// <summary>
+/// ゲーム内でのコールバック関数
+/// </summary>
+public class InGameCallBacks : MonoBehaviour
 {
     public void OnEnter(TileController tile)
     {

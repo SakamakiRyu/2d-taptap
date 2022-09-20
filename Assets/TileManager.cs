@@ -1,20 +1,27 @@
 using System.Linq;
 using UnityEngine;
 
+/// <summary>
+/// タイルの管理クラス
+/// </summary>
 public class TileManager : MonoBehaviour
 {
     [SerializeField]
-    private TileController[] _tile;
+    private TileController[] _tiles;
 
     // タップする順番
     private int[] _tapOrder;
 
     private void Start()
     {
-        SetNumber(_tile);
-        _tapOrder = CreateOrder(_tile.Length);
+        SetNumber(_tiles);
+        _tapOrder = CreateTapOrder(_tiles.Length);
     }
 
+    /// <summary>
+    /// タイルにIDを設定する
+    /// </summary>
+    /// <param name="tile"></param>
     private void SetNumber(TileController[] tile)
     {
         for (int count = 0; count < tile.Length; count++)
@@ -23,7 +30,12 @@ public class TileManager : MonoBehaviour
         }
     }
 
-    private int[] CreateOrder(int count)
+    /// <summary>
+    /// タップする順番を作成
+    /// </summary>
+    /// <param name="count"></param>
+    /// <returns></returns>
+    private int[] CreateTapOrder(int count)
     {
         var numbers = new int[count];
 
@@ -33,15 +45,18 @@ public class TileManager : MonoBehaviour
             numbers[i] = i;
         }
 
-        int[] order = CreateRandamNumberList(numbers);
+        int[] order = ShuffleNumbersList(numbers);
 
         return order;
     }
 
-    private int[] CreateRandamNumberList(int[] order)
+    /// <summary>
+    /// リストの中身をシャッフルする
+    /// </summary>
+    private int[] ShuffleNumbersList(int[] order)
     {
         // ランダムな数列を作成
-        System.Random rand = new System.Random();
+        System.Random rand = new();
         var randList = order.OrderBy(x => rand.Next()).ToArray();
         return randList;
     }
