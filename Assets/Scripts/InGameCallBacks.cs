@@ -15,4 +15,9 @@ public class InGameCallBacks : MonoBehaviour
     {
         tile.ChengeColor(Color.white);
     }
+
+    public void OnClick(TileController tile)
+    {
+        Debug.Log(tile.ID);
+    }
 }
