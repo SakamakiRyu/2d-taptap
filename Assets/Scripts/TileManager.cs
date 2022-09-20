@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 using static UnityEngine.Random;
 
 /// <summary>
@@ -68,6 +69,14 @@ public class TileManager : MonoBehaviour
     }
 
     /// <summary>
+    /// ボタン用関数
+    /// </summary>
+    public void CreateTapOrder()
+    {
+        _tapOrder = CreateTapOrder(_startedOrderCount);
+    }
+
+    /// <summary>
     /// 順番の確認
     /// </summary>
     public void TapOrderConfirm()
@@ -85,17 +94,14 @@ public class TileManager : MonoBehaviour
 
         foreach (var item in _tapOrder)
         {
-            if (timer < Interval)
+            while (timer < Interval)
             {
                 timer += Time.deltaTime;
                 yield return null;
             }
-            else
-            {
-                Debug.Log("flash");
-                timer = 0f;
-                yield return _tileArray[item].FlashAsync();
-            }
+
+            timer = 0f;
+            yield return _tileArray[item].FlashAsync();
         }
     }
 }

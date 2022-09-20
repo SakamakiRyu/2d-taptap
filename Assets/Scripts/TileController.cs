@@ -30,12 +30,12 @@ public class TileController : MonoBehaviour
     public IEnumerator FlashAsync()
     {
         _image.color = Color.red;
-        var time = 0f;
+        var timer = 0f;
         yield return null;
 
-        while (time < _showTime)
+        while (timer < _showTime)
         {
-            time += Time.deltaTime;
+            timer += Time.deltaTime;
             yield return null;
         }
 
