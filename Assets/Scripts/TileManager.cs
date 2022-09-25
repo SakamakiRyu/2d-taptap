@@ -1,10 +1,6 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
-using static UnityEngine.Random;
 
 /// <summary>
 /// タイルの管理クラス
@@ -12,33 +8,21 @@ using static UnityEngine.Random;
 public class TileManager : MonoBehaviour
 {
     // タイルの配列
+    [SerializeField]
     private TileController[] _tileArray;
 
-    // タップする順番
-    private List<int> _tapOrder;
+    /// <summary>
+    /// タイルの数
+    /// </summary>
+    public int TileCount => _tileArray.Length;
 
-    [Header("最初の注文")]
+    // 点滅の間隔
     [SerializeField]
-    private int _startedOrderCount;
-
-    // 間隔
-    private float Interval = 0.5f;
+    private float _interval = 0.5f;
 
     private void Start()
     {
-        _tileArray = FindObjectsOfType<TileController>();
-        SortTileArray(_tileArray);
         SetID(_tileArray);
-        _tapOrder = CreateTapOrder(_startedOrderCount);
-    }
-
-    /// <summary>
-    /// 配列のソート
-    /// </summary>
-    /// <param name="tiles"></param>
-    private void SortTileArray(TileController[] tiles)
-    {
-        _tileArray = tiles.Reverse().ToArray();
     }
 
     /// <summary>
@@ -50,30 +34,6 @@ public class TileManager : MonoBehaviour
         {
             tile[count].ID = count;
         }
-    }
-
-    /// <summary>
-    /// タップする順番を作成
-    /// </summary>
-    private List<int> CreateTapOrder(int count)
-    {
-        var tapOrder = new List<int>();
-
-        for (int i = 0; i < count; i++)
-        {
-            var item = Range(0, _tileArray.Length);
-            tapOrder.Add(item);
-        }
-
-        return tapOrder;
-    }
-
-    /// <summary>
-    /// ボタン用関数
-    /// </summary>
-    public void CreateTapOrder()
-    {
-        _tapOrder = CreateTapOrder(_startedOrderCount);
     }
 
     /// <summary>
@@ -90,11 +50,18 @@ public class TileManager : MonoBehaviour
     private IEnumerator TilesFlashAsync()
     {
         var timer = 0f;
+        List<int> tapOrder = null;
+
+        if (ServiceLocator<ITapTapManager>.IsValid)
+        {
+            tapOrder = ServiceLocator<ITapTapManager>.Instance.GetTapOrder();
+        }
+
         yield return null;
 
-        foreach (var item in _tapOrder)
+        foreach (var item in tapOrder)
         {
-            while (timer < Interval)
+            while (timer < _interval)
             {
                 timer += Time.deltaTime;
                 yield return null;
