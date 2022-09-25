@@ -14,12 +14,18 @@ public class TapTapManager : MonoBehaviour, ITapTapManager
     // タップする順番
     private List<int> _tapOrder;
 
+    // 現在の注文
+    private int _currentTapOrder = 0;
+
+    private int _orderCount { get; set; }
+
     // タイルの数
     private readonly int TILE_COUNT = 16;
 
     private void Start()
     {
         _tapOrder = CreateTapOrder(_startedOrderCount);
+        _orderCount = _tapOrder.Count;
     }
 
     private void OnEnable()
@@ -39,6 +45,14 @@ public class TapTapManager : MonoBehaviour, ITapTapManager
     }
 
     /// <summary>
+    /// 注文を作成
+    /// </summary>
+    public void RequestCreateTapOrder()
+    {
+        _tapOrder = CreateTapOrder(_startedOrderCount);
+    }
+
+    /// <summary>
     /// タップする順番を作成
     /// </summary>
     private List<int> CreateTapOrder(int count)
@@ -54,14 +68,6 @@ public class TapTapManager : MonoBehaviour, ITapTapManager
         return tapOrder;
     }
 
-    /// <summary>
-    /// 注文を確認
-    /// </summary>
-    public void CreateTapOrder()
-    {
-        _tapOrder = CreateTapOrder(_startedOrderCount);
-    }
-
     #region InGame CallBacks
     public void OnEnter(TileController tile)
     {
@@ -75,13 +81,20 @@ public class TapTapManager : MonoBehaviour, ITapTapManager
 
     public void OnClick(TileController tile)
     {
-        if (tile.ID == _tapOrder[0])
+        if (tile.ID == _tapOrder[_currentTapOrder])
         {
+            _currentTapOrder++;
+            _orderCount--;
             Debug.Log("OK");
         }
         else
         {
             Debug.Log("MISS");
+        }
+
+        if (_orderCount==0)
+        {
+            Debug.Log("SUCCESS");
         }
     }
 

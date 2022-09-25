@@ -4,8 +4,10 @@ using UnityEngine.UI;
 
 public class TileController : MonoBehaviour
 {
-    private float _showTime = 0.5f;
+    // “_–Å‚·‚éŠÔ
+    private float _flashTime = 0.5f;
 
+    // ƒ^ƒCƒ‹‚Ì¯•Ê”Ô†
     public int ID { get; set; }
 
     private Image _image;
@@ -33,7 +35,7 @@ public class TileController : MonoBehaviour
         var timer = 0f;
         yield return null;
 
-        while (timer < _showTime)
+        while (timer < _flashTime)
         {
             timer += Time.deltaTime;
             yield return null;
