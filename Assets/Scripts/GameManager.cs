@@ -82,10 +82,6 @@ public class GameManager : MonoBehaviour, IGameManager
             case Scene.Title:
                 break;
             case Scene.InGame:
-                if (ServiceLocator<ITapTapManager>.IsValid)
-                {
-                    ServiceLocator<ITapTapManager>.Instance.RequestStart();
-                }
                 break;
             default:
                 break;

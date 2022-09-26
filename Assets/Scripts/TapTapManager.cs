@@ -4,7 +4,7 @@ using static UnityEngine.Random;
 
 /// <summary>
 /// ゲームを管理するクラス
-/// ※タップの順番を注文と定義する
+/// ※タップの順番を[注文]と定義する
 /// </summary>
 public class TapTapManager : MonoBehaviour, ITapTapManager
 {
@@ -26,6 +26,7 @@ public class TapTapManager : MonoBehaviour, ITapTapManager
     // タイルの数
     private readonly int TILE_COUNT = 16;
 
+    #region Unity Function
     private void Start()
     {
         _tapOrder = CreateTapOrder(_startedOrderCount);
@@ -47,8 +48,7 @@ public class TapTapManager : MonoBehaviour, ITapTapManager
             ServiceLocator<ITapTapManager>.UnRegist(this);
         }
     }
-
-    
+    #endregion
 
     /// <summary>
     /// タップする順番を作成
@@ -66,18 +66,15 @@ public class TapTapManager : MonoBehaviour, ITapTapManager
         return tapOrder;
     }
 
-    #region MethodOfInterface
-    /// <summary>
-    /// 注文を作成
-    /// </summary>
-    void ITapTapManager.RequestCreateTapOrder()
-    {
-        _tapOrder = CreateTapOrder(_startedOrderCount);
-    }
-
+    #region Method Of Interface
     List<int> ITapTapManager.GetTapOrder()
     {
         return _tapOrder;
+    }
+
+    void ITapTapManager.RequestCreateTapOrder()
+    {
+        _tapOrder = CreateTapOrder(_startedOrderCount);
     }
 
     void ITapTapManager.RequestStart()
@@ -110,10 +107,17 @@ public class TapTapManager : MonoBehaviour, ITapTapManager
             Debug.Log("MISS");
         }
 
-        if (_orderCount==0)
+        if (_orderCount == 0)
         {
             Debug.Log("SUCCESS");
         }
+    }
+    #endregion
+
+    #region Used Button
+    public void GameStart()
+    {
+        _setOfInGame.SetActive(true);
     }
     #endregion
 }
