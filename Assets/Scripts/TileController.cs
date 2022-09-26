@@ -47,4 +47,19 @@ public class TileController : MonoBehaviour
         _image.color = Color.white;
         yield return null;
     }
+
+    public void OnEnter()
+    {
+        ChengeColor(Color.blue);
+    }
+
+    public void OnExit()
+    {
+        ChengeColor(Color.blue);
+    }
+
+    public void OnClick()
+    {
+
+    }
 }

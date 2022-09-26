@@ -67,9 +67,9 @@ public class TileManager : MonoBehaviour, ITileManager
         var timer = 0f;
         List<int> tapOrder = null;
 
-        if (ServiceLocator<IOrderControl>.IsValid)
+        if (ServiceLocator<IOrderGenerator>.IsValid)
         {
-            tapOrder = ServiceLocator<IOrderControl>.Instance.GetOrder();
+            tapOrder = ServiceLocator<IOrderGenerator>.Instance.GetOrder();
         }
 
         yield return null;

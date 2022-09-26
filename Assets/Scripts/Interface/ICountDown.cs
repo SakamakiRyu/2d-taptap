@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections;
 
-internal interface ICountDown
+public interface ICountDown
 {
     /// <summary>
     /// カウントダウン

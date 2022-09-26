@@ -1,4 +1,4 @@
-﻿internal interface ITileManager
+﻿public interface ITileManager
 {
     /// <summary>
     /// 注文の確認

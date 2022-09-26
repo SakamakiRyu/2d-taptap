@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.Random;
 
 /// <summary>
 /// ゲームを管理するクラス
@@ -15,14 +12,7 @@ public class TapTapManager : MonoBehaviour, ITapTapManager
     [SerializeField]
     private int _defaultOrderCount;
 
-    // タイルの数
-    private readonly int TILE_COUNT = 16;
-
     #region Unity Function
-    private void Start()
-    {
-    }
-
     private void OnEnable()
     {
         if (!ServiceLocator<ITapTapManager>.IsValid)
@@ -50,9 +40,9 @@ public class TapTapManager : MonoBehaviour, ITapTapManager
     #region Used Button
     public void GameStart()
     {
-        if (ServiceLocator<IOrderControl>.IsValid)
+        if (ServiceLocator<IOrderGenerator>.IsValid)
         {
-            ServiceLocator<IOrderControl>.Instance.CreateOrder(_defaultOrderCount);
+            ServiceLocator<IOrderGenerator>.Instance.CreateOrder(_defaultOrderCount);
         }
 
         if (ServiceLocator<ICountDown>.IsValid)

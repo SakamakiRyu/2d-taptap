@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+
 public interface ITapTapManager
 {
     /// <summary>

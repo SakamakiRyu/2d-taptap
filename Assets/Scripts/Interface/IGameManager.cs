@@ -1,4 +1,4 @@
-﻿internal interface IGameManager
+﻿public interface IGameManager
 {
     /// <summary>
     /// InGameにSceneを移動する
