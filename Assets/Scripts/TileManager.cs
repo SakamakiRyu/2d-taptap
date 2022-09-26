@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// タイルの管理クラス
@@ -11,6 +13,9 @@ public class TileManager : MonoBehaviour
     [SerializeField]
     private TileController[] _tileArray;
 
+    [SerializeField]
+    private Button _confirmButton;
+    
     /// <summary>
     /// タイルの数
     /// </summary>
@@ -51,6 +56,7 @@ public class TileManager : MonoBehaviour
     {
         var timer = 0f;
         List<int> tapOrder = null;
+        ChengeConfirmButtonState(false) ;
 
         if (ServiceLocator<ITapTapManager>.IsValid)
         {
@@ -70,5 +76,15 @@ public class TileManager : MonoBehaviour
             timer = 0f;
             yield return _tileArray[item].FlashAsync();
         }
+
+        ChengeConfirmButtonState(true);
+    }
+
+    /// <summary>
+    /// ConfirmButtonの状態を変更する
+    /// </summary>
+    private void ChengeConfirmButtonState(bool next)
+    {
+        _confirmButton.enabled = next;
     }
 }
