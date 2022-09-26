@@ -3,7 +3,7 @@ using UnityEngine;
 /// <summary>
 /// タイトルのボタン
 /// </summary>
-public class TitleButtonController : MonoBehaviour
+public class TitleButton : MonoBehaviour
 {
     public void OnClick()
     {

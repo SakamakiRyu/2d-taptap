@@ -1,8 +1,6 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 /// <summary>
 /// タイルの管理クラス
@@ -17,6 +15,8 @@ public class TileManager : MonoBehaviour, ITileManager
     [SerializeField]
     private float _interval = 0.5f;
 
+
+    #region Unity Function
     private void Start()
     {
         SetID(_tileArray);
@@ -37,6 +37,7 @@ public class TileManager : MonoBehaviour, ITileManager
             ServiceLocator<ITileManager>.UnRegist(this);
         }
     }
+    #endregion
 
     /// <summary>
     /// タイルにIDを設定する
