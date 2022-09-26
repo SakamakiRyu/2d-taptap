@@ -9,7 +9,7 @@ public class TitleButton : MonoBehaviour
     {
         if (ServiceLocator<IGameManager>.IsValid)
         {
-            ServiceLocator<IGameManager>.Instance.GoToInGame();
+            ServiceLocator<IGameManager>.Instance.LoadToInGame();
         }
     }
 }

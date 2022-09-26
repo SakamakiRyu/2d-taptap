@@ -15,7 +15,6 @@ public class TileManager : MonoBehaviour, ITileManager
     [SerializeField]
     private float _interval = 0.5f;
 
-
     #region Unity Function
     private void Start()
     {
@@ -39,6 +38,7 @@ public class TileManager : MonoBehaviour, ITileManager
     }
     #endregion
 
+    #region Private Function
     /// <summary>
     /// タイルにIDを設定する
     /// </summary>
@@ -49,6 +49,7 @@ public class TileManager : MonoBehaviour, ITileManager
             tile[count].ID = count;
         }
     }
+    #endregion
 
     /// <summary>
     /// 順番の確認
@@ -66,9 +67,9 @@ public class TileManager : MonoBehaviour, ITileManager
         var timer = 0f;
         List<int> tapOrder = null;
 
-        if (ServiceLocator<ITapTapManager>.IsValid)
+        if (ServiceLocator<IOrderControl>.IsValid)
         {
-            tapOrder = ServiceLocator<ITapTapManager>.Instance.GetTapOrder();
+            tapOrder = ServiceLocator<IOrderControl>.Instance.GetOrder();
         }
 
         yield return null;

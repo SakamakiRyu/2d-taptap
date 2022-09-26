@@ -4,7 +4,7 @@ using System.Collections;
 internal interface ICountDown
 {
     /// <summary>
-    /// カウントダウンのリクエスト
+    /// カウントダウン
     /// </summary>
-    IEnumerator RequestCountDown(params Action[] action);
+    void CountDown(params Action[] action);
 }

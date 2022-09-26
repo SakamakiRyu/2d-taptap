@@ -9,7 +9,7 @@ public class GameStartButton : MonoBehaviour
     {
         if (ServiceLocator<ITapTapManager>.IsValid)
         {
-            ServiceLocator<ITapTapManager>.Instance.RequestStart();
+            ServiceLocator<ITapTapManager>.Instance.GameStart();
         }
     }
 }

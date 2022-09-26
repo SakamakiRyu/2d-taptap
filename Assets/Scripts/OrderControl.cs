@@ -4,6 +4,7 @@ using static UnityEngine.Random;
 
 public class OrderControl : MonoBehaviour, IOrderControl
 {
+    // íçï∂
     private List<int> _order;
 
     private void OnEnable()

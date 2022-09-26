@@ -1,4 +1,7 @@
 ﻿internal interface IGameManager
 {
-    void GoToInGame();
+    /// <summary>
+    /// InGameにSceneを移動する
+    /// </summary>
+    void LoadToInGame();
 }

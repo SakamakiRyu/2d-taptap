@@ -6,15 +6,15 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class GameManager : MonoBehaviour, IGameManager
 {
-    // シーンの情報を管理するクラスなので、シングルトン化している
-    public static GameManager Instance { get; private set; } = null;
-
     public enum Scene
     {
         None = -1,
         Title,
         InGame
     }
+
+    // シーンの情報を管理するクラスなので、シングルトン化している
+    public static GameManager Instance { get; private set; } = null;
 
     // 現在のシーン
     public Scene CurrentScene { get; private set; } = Scene.None;
@@ -58,6 +58,7 @@ public class GameManager : MonoBehaviour, IGameManager
     }
     #endregion
 
+    #region private Function
     /// <summary>
     /// シーンの変更
     /// </summary>
@@ -87,11 +88,12 @@ public class GameManager : MonoBehaviour, IGameManager
                 break;
         }
     }
+    #endregion
 
     /// <summary>
     /// ゲームスタート
     /// </summary>
-    public void GoToInGame()
+    void IGameManager.LoadToInGame()
     {
         ChengeScene(Scene.InGame);
     }

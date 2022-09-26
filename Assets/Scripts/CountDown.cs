@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CountDown : MonoBehaviour, ICountDown
@@ -32,7 +33,12 @@ public class CountDown : MonoBehaviour, ICountDown
         }
     }
 
-    IEnumerator ICountDown.RequestCountDown(params Action[] action)
+    void ICountDown.CountDown(params Action[] actions)
+    {
+        StartCoroutine(CountDownAsync(actions));
+    }
+
+    IEnumerator CountDownAsync(params Action[] actions)
     {
         var timer = _countDownTime;
         _countDownText.enabled = true;
@@ -48,7 +54,7 @@ public class CountDown : MonoBehaviour, ICountDown
 
         _countDownText.enabled = false;
 
-        foreach (var item in action)
+        foreach (var item in actions)
         {
             item.Invoke();
         }
