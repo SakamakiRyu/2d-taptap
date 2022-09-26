@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -82,10 +81,6 @@ public class GameManager : MonoBehaviour, IGameManager
             case Scene.Title:
                 break;
             case Scene.InGame:
-                if (ServiceLocator<ITapTapManager>.IsValid)
-                {
-                    ServiceLocator<ITapTapManager>.Instance.RequestCreateTapOrder();
-                }
                 break;
             default:
                 break;
@@ -95,7 +90,7 @@ public class GameManager : MonoBehaviour, IGameManager
     /// <summary>
     /// ゲームスタート
     /// </summary>
-    public void GameStart()
+    public void GoToInGame()
     {
         ChengeScene(Scene.InGame);
     }

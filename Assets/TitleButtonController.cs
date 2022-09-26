@@ -1,14 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TitleButtonController : MonoBehaviour
 {
-    public void GameStart()
+    public void GoToInGame()
     {
         if (ServiceLocator<IGameManager>.IsValid)
         {
-            ServiceLocator<IGameManager>.Instance.GameStart();
+            ServiceLocator<IGameManager>.Instance.GoToInGame();
         }
     }
 }

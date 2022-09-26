@@ -1,4 +1,4 @@
 ﻿internal interface IGameManager
 {
-    void GameStart();
+    void GoToInGame();
 }
