@@ -13,11 +13,29 @@ public class CountDown : MonoBehaviour, ICountDown
     private void Awake()
     {
         _countDownText.text = "";
+        _countDownText.enabled = false;
+    }
+
+    private void OnEnable()
+    {
+        if (!ServiceLocator<ICountDown>.IsValid)
+        {
+            ServiceLocator<ICountDown>.Regist(this);
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (ServiceLocator<ICountDown>.IsValid)
+        {
+            ServiceLocator<ICountDown>.UnRegist(this);
+        }
     }
 
     IEnumerator ICountDown.RequestCountDown(Action action)
     {
         var timer = _countDownTime;
+        _countDownText.enabled = true;
         yield return null;
 
         while (timer > 0f)
@@ -29,6 +47,6 @@ public class CountDown : MonoBehaviour, ICountDown
         }
 
         _countDownText.enabled = false;
-        action();
+        action.Invoke();
     }
 }

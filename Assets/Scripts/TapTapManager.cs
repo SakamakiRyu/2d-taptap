@@ -119,8 +119,8 @@ public class TapTapManager : MonoBehaviour, ITapTapManager
     {
         if (ServiceLocator<ICountDown>.IsValid)
         {
-            ServiceLocator<ICountDown>.Instance.RequestCountDown(
-                () => _setOfInGame.SetActive(true));
+            StartCoroutine(ServiceLocator<ICountDown>.Instance.RequestCountDown(
+                () => _setOfInGame.SetActive(true)));
         }
     }
     #endregion

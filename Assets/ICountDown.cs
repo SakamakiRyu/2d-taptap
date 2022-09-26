@@ -3,5 +3,5 @@ using System.Collections;
 
 internal interface ICountDown
 {
-    IEnumerator RequestCountDown(Action action);
+    IEnumerator RequestCountDown(Action action = null);
 }
