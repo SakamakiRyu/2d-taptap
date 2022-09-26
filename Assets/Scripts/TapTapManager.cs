@@ -79,7 +79,7 @@ public class TapTapManager : MonoBehaviour, ITapTapManager
 
     void ITapTapManager.RequestStart()
     {
-        _setOfInGame.SetActive(true);
+        GameStart();
     }
     #endregion
 
@@ -117,7 +117,11 @@ public class TapTapManager : MonoBehaviour, ITapTapManager
     #region Used Button
     public void GameStart()
     {
-        _setOfInGame.SetActive(true);
+        if (ServiceLocator<ICountDown>.IsValid)
+        {
+            ServiceLocator<ICountDown>.Instance.RequestCountDown(
+                () => _setOfInGame.SetActive(true));
+        }
     }
     #endregion
 }
