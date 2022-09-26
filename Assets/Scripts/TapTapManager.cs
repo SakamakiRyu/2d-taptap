@@ -51,7 +51,7 @@ public class TapTapManager : MonoBehaviour, ITapTapManager
     #endregion
 
     /// <summary>
-    /// ƒ^ƒbƒv‚·‚é‡”Ô‚ğì¬
+    /// ’•¶‚ğì¬
     /// </summary>
     private List<int> CreateTapOrder(int count)
     {
@@ -63,6 +63,7 @@ public class TapTapManager : MonoBehaviour, ITapTapManager
             tapOrder.Add(item);
         }
 
+        _orderCount = tapOrder.Count;
         return tapOrder;
     }
 
@@ -72,7 +73,7 @@ public class TapTapManager : MonoBehaviour, ITapTapManager
         return _tapOrder;
     }
 
-    void ITapTapManager.RequestCreateTapOrder()
+    void ITapTapManager.RequestCreateOrder()
     {
         _tapOrder = CreateTapOrder(_startedOrderCount);
     }

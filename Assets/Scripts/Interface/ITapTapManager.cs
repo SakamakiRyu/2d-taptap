@@ -10,7 +10,7 @@ public interface ITapTapManager
     /// <summary>
     /// 注文の発行をリクエストする
     /// </summary>
-    void RequestCreateTapOrder();
+    void RequestCreateOrder();
 
     /// <summary>
     /// ゲームができるようにする
