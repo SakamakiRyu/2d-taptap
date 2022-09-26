@@ -9,6 +9,9 @@ using static UnityEngine.Random;
 public class TapTapManager : MonoBehaviour, ITapTapManager
 {
     [SerializeField]
+    private GameObject _setOfInGame;
+
+    [SerializeField]
     private int _startedOrderCount;
 
     // タップする順番
@@ -17,6 +20,7 @@ public class TapTapManager : MonoBehaviour, ITapTapManager
     // 現在の注文
     private int _currentTapOrder = 0;
 
+    // 注文数
     private int _orderCount { get; set; }
 
     // タイルの数
@@ -44,13 +48,7 @@ public class TapTapManager : MonoBehaviour, ITapTapManager
         }
     }
 
-    /// <summary>
-    /// 注文を作成
-    /// </summary>
-    public void RequestCreateTapOrder()
-    {
-        _tapOrder = CreateTapOrder(_startedOrderCount);
-    }
+    
 
     /// <summary>
     /// タップする順番を作成
@@ -67,6 +65,26 @@ public class TapTapManager : MonoBehaviour, ITapTapManager
 
         return tapOrder;
     }
+
+    #region MethodOfInterface
+    /// <summary>
+    /// 注文を作成
+    /// </summary>
+    void ITapTapManager.RequestCreateTapOrder()
+    {
+        _tapOrder = CreateTapOrder(_startedOrderCount);
+    }
+
+    List<int> ITapTapManager.GetTapOrder()
+    {
+        return _tapOrder;
+    }
+
+    void ITapTapManager.RequestStart()
+    {
+        _setOfInGame.SetActive(true);
+    }
+    #endregion
 
     #region InGame CallBacks
     public void OnEnter(TileController tile)
@@ -96,11 +114,6 @@ public class TapTapManager : MonoBehaviour, ITapTapManager
         {
             Debug.Log("SUCCESS");
         }
-    }
-
-    public List<int> GetTapOrder()
-    {
-        return _tapOrder;
     }
     #endregion
 }

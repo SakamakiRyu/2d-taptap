@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour, IGameManager
         InGame
     }
 
+    // åªç›ÇÃÉVÅ[Éì
     public Scene CurrentScene { get; private set; } = Scene.None;
 
     #region Unity Function
@@ -81,6 +82,10 @@ public class GameManager : MonoBehaviour, IGameManager
             case Scene.Title:
                 break;
             case Scene.InGame:
+                if (ServiceLocator<ITapTapManager>.IsValid)
+                {
+                    ServiceLocator<ITapTapManager>.Instance.RequestStart();
+                }
                 break;
             default:
                 break;

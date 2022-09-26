@@ -39,7 +39,7 @@ public class TileManager : MonoBehaviour
     /// <summary>
     /// ‡”Ô‚ÌŠm”F
     /// </summary>
-    public void TapOrderConfirm()
+    public void ConfirmTapOrder()
     {
         StartCoroutine(TilesFlashAsync());
     }
