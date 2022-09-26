@@ -96,6 +96,16 @@ public class TapTapManager : MonoBehaviour, ITapTapManager
 
     public void OnClick(TileController tile)
     {
+        if (_orderCount == 0)
+        {
+            return;
+        }
+
+        Check(tile);
+    }
+
+    private void Check(TileController tile)
+    {
         if (tile.ID == _tapOrder[_currentTapOrder])
         {
             _currentTapOrder++;

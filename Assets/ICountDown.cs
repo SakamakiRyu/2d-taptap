@@ -3,5 +3,8 @@ using System.Collections;
 
 internal interface ICountDown
 {
-    IEnumerator RequestCountDown(Action action = null);
+    /// <summary>
+    /// カウントダウンのリクエスト
+    /// </summary>
+    IEnumerator RequestCountDown(params Action[] action);
 }

@@ -1,11 +1,11 @@
 using UnityEngine;
 
 /// <summary>
-/// ゲームスタートボタン
+/// ゲームスタートのボタン
 /// </summary>
 public class GameStartButton : MonoBehaviour
 {
-    public void GameStart()
+    public void OnClick()
     {
         if (ServiceLocator<ITapTapManager>.IsValid)
         {

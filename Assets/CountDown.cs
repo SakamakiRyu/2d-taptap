@@ -32,7 +32,7 @@ public class CountDown : MonoBehaviour, ICountDown
         }
     }
 
-    IEnumerator ICountDown.RequestCountDown(Action action)
+    IEnumerator ICountDown.RequestCountDown(params Action[] action)
     {
         var timer = _countDownTime;
         _countDownText.enabled = true;
@@ -47,6 +47,11 @@ public class CountDown : MonoBehaviour, ICountDown
         }
 
         _countDownText.enabled = false;
-        action.Invoke();
+
+        foreach (var item in action)
+        {
+            item.Invoke();
+        }
+        yield return null;
     }
 }

@@ -7,19 +7,11 @@ using UnityEngine.UI;
 /// <summary>
 /// タイルの管理クラス
 /// </summary>
-public class TileManager : MonoBehaviour
+public class TileManager : MonoBehaviour, ITileManager
 {
     // タイルの配列
     [SerializeField]
     private TileController[] _tileArray;
-
-    [SerializeField]
-    private Button _confirmButton;
-    
-    /// <summary>
-    /// タイルの数
-    /// </summary>
-    public int TileCount => _tileArray.Length;
 
     // 点滅の間隔
     [SerializeField]
@@ -28,6 +20,22 @@ public class TileManager : MonoBehaviour
     private void Start()
     {
         SetID(_tileArray);
+    }
+
+    private void OnEnable()
+    {
+        if (!ServiceLocator<ITileManager>.IsValid)
+        {
+            ServiceLocator<ITileManager>.Regist(this);
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (ServiceLocator<ITileManager>.IsValid)
+        {
+            ServiceLocator<ITileManager>.UnRegist(this);
+        }
     }
 
     /// <summary>
@@ -44,7 +52,7 @@ public class TileManager : MonoBehaviour
     /// <summary>
     /// 順番の確認
     /// </summary>
-    public void ConfirmTapOrder()
+    void ITileManager.ConfirmOrder()
     {
         StartCoroutine(TilesFlashAsync());
     }
@@ -56,7 +64,6 @@ public class TileManager : MonoBehaviour
     {
         var timer = 0f;
         List<int> tapOrder = null;
-        ChengeConfirmButtonState(false) ;
 
         if (ServiceLocator<ITapTapManager>.IsValid)
         {
@@ -76,15 +83,5 @@ public class TileManager : MonoBehaviour
             timer = 0f;
             yield return _tileArray[item].FlashAsync();
         }
-
-        ChengeConfirmButtonState(true);
-    }
-
-    /// <summary>
-    /// ConfirmButtonの状態を変更する
-    /// </summary>
-    private void ChengeConfirmButtonState(bool next)
-    {
-        _confirmButton.enabled = next;
     }
 }

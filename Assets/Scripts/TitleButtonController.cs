@@ -1,11 +1,11 @@
 using UnityEngine;
 
 /// <summary>
-/// タイトルのボタン用
+/// タイトルのボタン
 /// </summary>
 public class TitleButtonController : MonoBehaviour
 {
-    public void GoToInGame()
+    public void OnClick()
     {
         if (ServiceLocator<IGameManager>.IsValid)
         {
