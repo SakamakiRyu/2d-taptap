@@ -23,7 +23,7 @@ public class OrderGenerator : MonoBehaviour, IOrderGenerator
         }
     }
 
-    void IOrderGenerator.CreateOrder(int tileCount)
+    List<int> IOrderGenerator.CreateOrder(int tileCount)
     {
         List<int> order = null;
 
@@ -32,5 +32,7 @@ public class OrderGenerator : MonoBehaviour, IOrderGenerator
             var item = Range(0, tileCount);
             order.Add(item);
         }
+
+        return order;
     }
 }

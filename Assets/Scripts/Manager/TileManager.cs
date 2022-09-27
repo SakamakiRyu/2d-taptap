@@ -69,7 +69,7 @@ public class TileManager : MonoBehaviour, ITileManager
 
         if (ServiceLocator<IOrderGenerator>.IsValid)
         {
-            tapOrder = ServiceLocator<IOrderGenerator>.Instance.GetOrder();
+            // tapOrder = ServiceLocator<IOrderGenerator>.Instance.GetOrder();
         }
 
         yield return null;

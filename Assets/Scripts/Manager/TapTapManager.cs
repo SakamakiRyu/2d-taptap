@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -11,6 +12,8 @@ public class TapTapManager : MonoBehaviour, ITapTapManager
 
     [SerializeField]
     private int _defaultOrderCount;
+
+    private List<int> _orderList;
 
     #region Unity Function
     private void OnEnable()
@@ -42,7 +45,7 @@ public class TapTapManager : MonoBehaviour, ITapTapManager
     {
         if (ServiceLocator<IOrderGenerator>.IsValid)
         {
-            ServiceLocator<IOrderGenerator>.Instance.CreateOrder(_defaultOrderCount);
+            _orderList = ServiceLocator<IOrderGenerator>.Instance.CreateOrder(_defaultOrderCount);
         }
 
         if (ServiceLocator<ICountDown>.IsValid)
